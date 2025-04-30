@@ -6,6 +6,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //ajout d'une appBar avec un titre et une couleur de fond
     return Scaffold(
       body: Center(
         child: Text(

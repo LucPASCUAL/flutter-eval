@@ -1,29 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class ListViewExample extends StatelessWidget {
-  final List<String> fruits = ['Pomme', 'Banane', 'Orange', 'Mangue', 'Ananas'];
+  final List<String> tasks;
+  final Function(int) onDelete;
 
-  ListViewExample({super.key});
+  const ListViewExample({
+    Key? key,
+    required this.tasks,
+    required this.onDelete,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: fruits.length,
+      itemCount: tasks.length,
       itemBuilder: (context, index) {
-        return Container(
-          height: 70,
-          decoration: BoxDecoration(
-            color: Color(0xF1F1F1F1),
+        return Slidable(
+          key: ValueKey(tasks[index]),
+          endActionPane: ActionPane(
+            motion: const DrawerMotion(),
+            extentRatio: 0.25,
+            children: [
+              SlidableAction(
+                onPressed: (_) => onDelete(index),
+                backgroundColor: Colors.red,
+                foregroundColor: Colors.white,
+                icon: Icons.delete,
+                label: 'Supprimer',
+              ),
+            ],
           ),
-          margin: EdgeInsets.all(4.0),
           child: ListTile(
-            leading: Icon(Icons.food_bank),
-            title: Text(fruits[index]),
-            subtitle: Text(
-              'Ceci est une description',
-              overflow: TextOverflow.ellipsis,
-              maxLines: 2,
-            ),
+            title: Text(tasks[index]),
           ),
         );
       },
