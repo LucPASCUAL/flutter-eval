@@ -13,7 +13,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'ESN.81 évaluation Flutter',
-      home: HomeScreen(),
+      theme: ThemeData(
+        primarySwatch: Colors.deepPurple,
+        scaffoldBackgroundColor: const Color(0xFFF6F1F1),
+      ),
+      home: const HomeScreen(),
     );
   }
 }

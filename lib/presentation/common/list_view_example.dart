@@ -1,30 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:todo/presentation/common/task_item.dart';
+import 'package:todo/presentation/domain/models/task.dart';
 
 class ListViewExample extends StatelessWidget {
-  final List<String> fruits = ['Pomme', 'Banane', 'Orange', 'Mangue', 'Ananas'];
+  final List<Task> tasks;
+  final void Function(int) onDelete;
 
-  ListViewExample({super.key});
+  const ListViewExample({
+    super.key,
+    required this.tasks,
+    required this.onDelete,
+  });
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: fruits.length,
+      itemCount: tasks.length,
       itemBuilder: (context, index) {
-        return Container(
-          height: 70,
-          decoration: BoxDecoration(
-            color: Color(0xF1F1F1F1),
-          ),
-          margin: EdgeInsets.all(4.0),
-          child: ListTile(
-            leading: Icon(Icons.food_bank),
-            title: Text(fruits[index]),
-            subtitle: Text(
-              'Ceci est une description',
-              overflow: TextOverflow.ellipsis,
-              maxLines: 2,
-            ),
-          ),
+        return TaskItem(
+          task: tasks[index],
+          onDelete: () => onDelete(index),
         );
       },
     );
