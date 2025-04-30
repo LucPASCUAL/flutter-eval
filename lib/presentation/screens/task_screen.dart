@@ -25,6 +25,12 @@ class _TaskScreenState extends State<TaskScreen> {
     }
   }
 
+  void _deleteTask(int index) {
+    setState(() {
+      _tasks.removeAt(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,7 +80,7 @@ class _TaskScreenState extends State<TaskScreen> {
             ),
           ),
           Expanded(
-            child: ListViewTodos(items: _tasks),
+            child: ListViewTodos(items: _tasks, onDelete: _deleteTask),
           ),
         ],
       ),
