@@ -8,9 +8,20 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text(
-          "Bienvenue sur Flutter !",
-          style: StyleUtil.getMainTextStyle(),
+        child: Column(
+          children: [
+            Text(
+              "Bienvenue sur Flutter !",
+              style: StyleUtil.getMainTextStyle(),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/task');
+              },
+              child: const Text("Go to Task"),
+            ),
+          ],
         ),
       ),
     );
