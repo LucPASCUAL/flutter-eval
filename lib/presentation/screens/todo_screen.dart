@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart'; 
+import 'package:flutter/services.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 class TodoScreen extends StatefulWidget {
@@ -64,10 +64,11 @@ class _TodoScreenState extends State<TodoScreen> {
                     labelText: 'Description',
                     border: OutlineInputBorder(),
                   ),
-                  maxLines: null, 
-                  keyboardType: TextInputType.multiline, 
+                  maxLines: null,
+                  keyboardType: TextInputType.multiline,
                   onSubmitted: (value) {
-                    _addTask(_titleController.text, _descriptionController.text);
+                    _addTask(
+                        _titleController.text, _descriptionController.text);
                   },
                 ),
                 const SizedBox(height: 8),
@@ -82,58 +83,68 @@ class _TodoScreenState extends State<TodoScreen> {
             ),
           ),
           Expanded(
-            child: ListView.separated(
-              itemCount: _tasks.length,
-              itemBuilder: (context, index) {
-                return Slidable(
-                  key: ValueKey(_tasks[index]),
-                  startActionPane: ActionPane( 
-                    motion: const ScrollMotion(),
-                    children: [
-                      SlidableAction(
-                        onPressed: (context) => _removeTask(index),
-                        backgroundColor: Colors.red,
-                        foregroundColor: Colors.white,
-                        icon: Icons.delete,
-                        flex: 1,
-                      ),
-                      SlidableAction(
-                        onPressed: (context) => _copyTaskToClipboard(
-                          _tasks[index]['title']!,
-                          _tasks[index]['description']!,
-                        ),
-                        backgroundColor: Colors.blue,
-                        foregroundColor: Colors.white,
-                        icon: Icons.copy,
-                        flex: 1,
-                      ),
-                    ],
-                  ),
-                  child: ListTile(
-                    title: Text.rich(
-                      TextSpan(
-                        children: [
-                          TextSpan(
-                            text: '${_tasks[index]['title']!}\n',
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
-                          ),
-                          TextSpan(
-                            text: _tasks[index]['description']!,
-                            style: const TextStyle(
-                              fontSize: 14,
-                            ),
-                          ),
-                        ],
+            child: _tasks.isEmpty
+                ? Center(
+                    child: Text(
+                      'Aucune tâche disponible',
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.grey,
                       ),
                     ),
+                  )
+                : ListView.separated(
+                    itemCount: _tasks.length,
+                    itemBuilder: (context, index) {
+                      return Slidable(
+                        key: ValueKey(_tasks[index]),
+                        startActionPane: ActionPane(
+                          motion: const ScrollMotion(),
+                          children: [
+                            SlidableAction(
+                              onPressed: (context) => _removeTask(index),
+                              backgroundColor: Colors.red,
+                              foregroundColor: Colors.white,
+                              icon: Icons.delete,
+                              flex: 1,
+                            ),
+                            SlidableAction(
+                              onPressed: (context) => _copyTaskToClipboard(
+                                _tasks[index]['title']!,
+                                _tasks[index]['description']!,
+                              ),
+                              backgroundColor: Colors.blue,
+                              foregroundColor: Colors.white,
+                              icon: Icons.copy,
+                              flex: 1,
+                            ),
+                          ],
+                        ),
+                        child: ListTile(
+                          title: Text.rich(
+                            TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: '${_tasks[index]['title']!}\n',
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: _tasks[index]['description']!,
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                    separatorBuilder: (context, index) => const Divider(),
                   ),
-                );
-              },
-              separatorBuilder: (context, index) => const Divider(),
-            ),
           ),
         ],
       ),
