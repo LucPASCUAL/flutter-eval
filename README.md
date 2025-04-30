@@ -1,10 +1,11 @@
 # Evaluation écrite
 
 1. Dans le domaine du développement mobile, on distingue trois grandes familles de technologies. Citez-les.
+
    les applications natives technologie pour une seule plateforme (Android, iOS, Windows, Linux…)
    les applications cross-plateforme peut etre utilisé sur android IOS WEB...
    Progressive app (PWA) 
-2. Application web responsive
+Application web responsive
    • Fonctionnalités hors-ligne,
    notification…
 

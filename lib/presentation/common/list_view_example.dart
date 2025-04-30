@@ -19,6 +19,7 @@ class _ListViewExampleState extends State<ListViewExample> {
   final _titreController = TextEditingController();
   final _descriptionController = TextEditingController();
 
+
   @override
   void dispose() {
     _titreController.dispose();
@@ -63,6 +64,7 @@ class _ListViewExampleState extends State<ListViewExample> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
+
             // Formulaire pour ajouter une tâche
             Form(
               key: _formKey,
@@ -151,6 +153,11 @@ class _ListViewExampleState extends State<ListViewExample> {
                 );
               },
             ),
+            if(widget.todo.isEmpty)
+              const Text(
+                "Aucune tâche à afficher.",
+                style: TextStyle(fontSize: 16),
+              ),
           ],
         ),
       ),
