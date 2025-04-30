@@ -28,7 +28,7 @@ Les 2 mots clés vont permettre de créer une variable immutable, mais il y a un
 
 ### 4. A quoi sert le BuildContext passé en paramètre de la méthode build ?
 
-?
+Le `BuildContext` est un objet qui représente le contexte dans lequel un widget est construit.\
 
 ### 5. Quelle est la différence entre un Stateless Widget et un Stateful Widget ?
 

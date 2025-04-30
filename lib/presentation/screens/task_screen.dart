@@ -38,7 +38,8 @@ class _TaskScreenState extends State<TaskScreen> {
     setState(() {
       tasks.add(Task(
         title: titleTextController.text,
-        description: descriptionTextController.text,
+        description: descriptionTextController.text.isNotEmpty ?
+          descriptionTextController.text  : "Aucune description",
       ));
     });
   }
@@ -59,23 +60,23 @@ class _TaskScreenState extends State<TaskScreen> {
       ),
       body: Column(
         children: [
-          Expanded( // Wrap ListView.builder in Expanded
+          Expanded(
             child: ListView.builder(
-              itemCount: tasks.length,
-              itemBuilder: (context, index) {
-                return Container(
-                  height: 70,
-                  decoration: BoxDecoration(
-                    color: Color(0xF1F1F1F1),
-                  ),
-                  margin: EdgeInsets.all(4.0),
-                  child: TaskWidget(
-                      task: tasks[index],
-                      index: index,
-                      onDelete: _deleteTask
-                  )
-                );
-              },
+                itemCount: tasks.length,
+                itemBuilder: (context, index) {
+                  return Container(
+                      height: 70,
+                      decoration: BoxDecoration(
+                        color: Color(0xF1F1F1F1),
+                      ),
+                      margin: EdgeInsets.all(4.0),
+                      child: TaskWidget(
+                          task: tasks[index],
+                          index: index,
+                          onDelete: _deleteTask
+                      )
+                  );
+                }
             ),
           ),
           Form(
@@ -100,7 +101,7 @@ class _TaskScreenState extends State<TaskScreen> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue,
                   ),
-                  child: Text('Add Task'),
+                  child: Text('Créer la tâche'),
                 ),
               ],
             ),
