@@ -5,6 +5,7 @@ class StyleUtil {
   static const Color backgroundColorDelete = Colors.red;
   static const Color backgroundColorCopy = Colors.blue;
   static const Color backgroundColorCopied = Colors.green;
+  static const Color isEmptyColor = Colors.grey;
 
   static TextStyle getMainTextStyle() {
     return TextStyle(

@@ -49,14 +49,25 @@ class _TodoListPageState extends State<TodoListPage> {
         child: Column(
           children: [
             Expanded(
-              child: ListView.builder(
-                itemCount: _models.length,
-                itemBuilder: (context, index) => ModelTile(
-                  model: _models[index],
-                  onDelete: () => _deleteTask(index),
-                  onCopy: () => _copyTask(index),
-                ),
-              ),
+              child: _models.isEmpty
+                  ? Center(
+                      child: Text(
+                        "Vous n'avez aucune tâche actuelle",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: StyleUtil.isEmptyColor,
+                          fontStyle: FontStyle.italic,
+                        ),
+                      ),
+                    )
+                  : ListView.builder(
+                      itemCount: _models.length,
+                      itemBuilder: (context, index) => ModelTile(
+                        model: _models[index],
+                        onDelete: () => _deleteTask(index),
+                        onCopy: () => _copyTask(index),
+                      ),
+                    ),
             ),
             const Divider(height: 32),
             ModelForm(onAdd: _addTask),
