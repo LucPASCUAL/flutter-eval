@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo/util/style_util.dart';
+import 'package:todo/presentation/screens/todo_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -7,10 +7,18 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Center(child: const Text('Accueil')),
+      ),
       body: Center(
-        child: Text(
-          "Bienvenue sur Flutter !",
-          style: StyleUtil.getMainTextStyle(),
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const TodoScreen()),
+            );
+          },
+          child: const Text('Aller à la Todo List'),
         ),
       ),
     );
