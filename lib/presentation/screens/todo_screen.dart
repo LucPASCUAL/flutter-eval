@@ -10,17 +10,19 @@ class TodoScreen extends StatefulWidget {
 }
 
 class _TodoScreenState extends State<TodoScreen> {
-  final List<Map<String, String>> _tasks = [];
+  final List<Map<String, dynamic>> _tasks = [];
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
+  IconData _selectedIcon = Icons.task;
 
-  void _addTask(String title, String description) {
+  void _addTask(String title, String description, IconData icon) {
     if (title.isNotEmpty && description.isNotEmpty) {
       setState(() {
-        _tasks.add({'title': title, 'description': description});
+        _tasks.add({'title': title, 'description': description, 'icon': icon});
       });
       _titleController.clear();
       _descriptionController.clear();
+      _selectedIcon = Icons.task; // Reset icon selection
     }
   }
 
@@ -42,7 +44,7 @@ class _TodoScreenState extends State<TodoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('To-Do List'),
+        title: const Text('Todo List'),
       ),
       body: Column(
         children: [
@@ -66,16 +68,71 @@ class _TodoScreenState extends State<TodoScreen> {
                   ),
                   maxLines: null,
                   keyboardType: TextInputType.multiline,
-                  onSubmitted: (value) {
-                    _addTask(
-                        _titleController.text, _descriptionController.text);
-                  },
+                ),
+                const SizedBox(height: 8),
+                SizedBox(
+                  width: double.infinity,
+                  child: DropdownButtonFormField<IconData>(
+                    value: _selectedIcon,
+                    decoration: const InputDecoration(
+                      labelText: 'Icône',
+                      border: OutlineInputBorder(),
+                    ),
+                    items: [
+                      DropdownMenuItem(
+                        value: Icons.task,
+                        child: Row(
+                          children: const [
+                            Icon(Icons.task),
+                            SizedBox(width: 8),
+                            Text('Tâche'),
+                          ],
+                        ),
+                      ),
+                      DropdownMenuItem(
+                        value: Icons.work,
+                        child: Row(
+                          children: const [
+                            Icon(Icons.work),
+                            SizedBox(width: 8),
+                            Text('Travail'),
+                          ],
+                        ),
+                      ),
+                      DropdownMenuItem(
+                        value: Icons.home,
+                        child: Row(
+                          children: const [
+                            Icon(Icons.home),
+                            SizedBox(width: 8),
+                            Text('Maison'),
+                          ],
+                        ),
+                      ),
+                      DropdownMenuItem(
+                        value: Icons.school,
+                        child: Row(
+                          children: const [
+                            Icon(Icons.school),
+                            SizedBox(width: 8),
+                            Text('École'),
+                          ],
+                        ),
+                      ),
+                    ],
+                    onChanged: (value) {
+                      setState(() {
+                        _selectedIcon = value!;
+                      });
+                    },
+                  ),
                 ),
                 const SizedBox(height: 8),
                 ElevatedButton(
                   onPressed: () => _addTask(
                     _titleController.text,
                     _descriptionController.text,
+                    _selectedIcon,
                   ),
                   child: const Text('Ajouter une tâche'),
                 ),
@@ -121,6 +178,7 @@ class _TodoScreenState extends State<TodoScreen> {
                           ],
                         ),
                         child: ListTile(
+                          leading: Icon(_tasks[index]['icon'] as IconData),
                           title: Text.rich(
                             TextSpan(
                               children: [
