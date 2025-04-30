@@ -8,9 +8,14 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text(
-          "Bienvenue sur Flutter !",
-          style: StyleUtil.getMainTextStyle(),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "Application Todo List",
+              style: StyleUtil.getMainTextStyle(),
+            ),
+          ],
         ),
       ),
     );
