@@ -1,0 +1,42 @@
+import 'package:flutter/material.dart';
+
+class TaskFormFields extends StatelessWidget {
+  final TextEditingController nameController;
+  final TextEditingController descriptionController;
+
+  const TaskFormFields({
+    super.key,
+    required this.nameController,
+    required this.descriptionController,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        TextFormField(
+          controller: nameController,
+          decoration: InputDecoration(
+            labelText: 'Nom',
+            counterText: '${nameController.text.length}/20',
+          ),
+          maxLength: 20,
+          validator: (value) {
+            if (value == null || value.trim().isEmpty) {
+              return 'Veuillez entrer un nom';
+            }
+            return null;
+          },
+        ),
+        TextFormField(
+          controller: descriptionController,
+          decoration: InputDecoration(
+            labelText: 'Description',
+            counterText: '${descriptionController.text.length}/30',
+          ),
+          maxLength: 30,
+        ),
+      ],
+    );
+  }
+}

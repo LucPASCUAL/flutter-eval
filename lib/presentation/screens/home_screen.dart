@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo/presentation/common/custom_button.dart';
 import 'package:todo/util/style_util.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -8,9 +9,14 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text(
-          "Bienvenue sur Flutter !",
-          style: StyleUtil.getMainTextStyle(),
+        child: Column(
+          children: [
+            Text(
+              "Bienvenue sur Flutter !",
+              style: StyleUtil.getMainTextStyle(),
+            ),
+            CustomElevatedButton(text: "To do List", route: "/todo")
+          ],
         ),
       ),
     );
