@@ -13,8 +13,8 @@ class ListViewExample extends StatelessWidget {
         return Container(
           height: 70,
           decoration: BoxDecoration(
-            color: Color(0xF1F1F1F1),
-          ),
+              color: Colors.blueGrey,
+              borderRadius: BorderRadius.circular(12.0)),
           margin: EdgeInsets.all(4.0),
           child: ListTile(
             leading: Icon(Icons.food_bank),
